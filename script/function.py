@@ -65,6 +65,6 @@ def diameter_calculate(l):
     result = 10000 * (6.29 / 463) * l
     return round(result, 2)
 
-# 誤差率を計算する
+# 誤差率を計算する ((測定値 - 真値) ÷ 真値) × 100 [%]
 def calculation_diff(theory, value):
-    return (value - theory) / theory
+    return ((value - theory) / theory) * 100

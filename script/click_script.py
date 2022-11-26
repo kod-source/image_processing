@@ -44,7 +44,7 @@ def show_image(show_img, x, y):
         result = function.diameter_calculate(l)
         diff = function.calculation_diff(10000, result)
         pos_result_str='(result'+str(count)+')=('+str(result)+')'
-        pos_diff_str='(誤差率'+str(count)+')=('+str(diff)+')'
+        pos_diff_str='(diff'+str(count)+')=('+str(diff)+')'
         count += 1
         cv2.putText(show_img,pos_result_str,(x_shaft, y_shaft),cv2.FONT_HERSHEY_PLAIN,2,255,2,cv2.LINE_AA)
         cv2.putText(show_img,pos_diff_str,(x_shaft, y_shaft + 35),cv2.FONT_HERSHEY_PLAIN,2,255,2,cv2.LINE_AA)
