@@ -31,7 +31,10 @@ pip install "ocrd-fork-pylsd == 0.0.3"
 ```
 
 ## 実行方法
+- scriptフォルダー配下にあるファイルを指定する
+- 第1引数にファイル名を指定する
+- 第2引数に倍率の真値を指定する （真値がわからない時は指定しなくても良い）
 ```
-
+python script/click_script.py 10k.jpg 10000
 ```
 
