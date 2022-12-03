@@ -5,8 +5,10 @@ file_name = '10k.jpg'
 
 # 線を引いた座標のリスト
 coordinate = []
+# 画像の輝度の自動調整
+function.brightness_adjustment(file_name)
 # 画像データの読み込み＆画像に線を引く
-img = function.input_image(file_name, coordinate)
+img = function.input_image("brightness_" + file_name, coordinate)
 # 計算結果を求めるための必要な座標のリスト
 show_result_corrdinates = []
 # 何回目かを示すための値
