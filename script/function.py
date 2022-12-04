@@ -88,4 +88,4 @@ def diameter_calculate(l):
 
 # 誤差率を計算する ((測定値 - 真値) ÷ 真値) × 100 [%]
 def calculation_diff(theory, value):
-    return ((value - theory) / theory) * 100
+    return round(((value - theory) / theory) * 100, 3)
