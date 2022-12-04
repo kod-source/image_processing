@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
 
-file_name = 'dark_10k.jpg'
+file_name = 'SAX10k.tif'
 
 # 画像読込
 img = cv2.imread("img/" + file_name)
@@ -28,8 +28,4 @@ for i in range(256):
 # 読込画像をガンマ変換
 gamma_img = cv2.LUT(img,img2gamma)
 
-# 画像を表示
-cv2.imshow("img",img)           # オリジナル画像
-cv2.imshow("gamma",gamma_img)   # ガンマ変換後の画像
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+cv2.imwrite("img/gamma_" + file_name, gamma_img)

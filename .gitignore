@@ -2,3 +2,4 @@ script/__pycache__
 result/*
 !result/result_10k.jpg
 img/brightness*
+img/gamma*
