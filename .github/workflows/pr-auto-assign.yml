@@ -1,9 +1,7 @@
 name: pr-auto-assign
 on:
-  pull_request_target:
-    types:
-      - opened
-      - ready_for_review
+  pull_request:
+    types: [opened, ready_for_review]
 
 jobs:
   pr-auto-assign:
