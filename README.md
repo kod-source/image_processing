@@ -20,11 +20,12 @@ pip install pylsd
 python3の方は対応させた別バージョン
 ```
 pip install "ocrd-fork-pylsd == 0.0.3"
-`
+```
 
 ### ImportError: cannot import name 'lsd' from 'lsd'
 
-pip install opencv-contrib-python``
+pip install opencv-contrib-python
+
 
 ## ディレクトリ構成
 ```
