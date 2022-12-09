@@ -38,3 +38,4 @@ pip install "ocrd-fork-pylsd == 0.0.3"
 python script/click_script.py 10k.jpg 10000
 ```
 
+
