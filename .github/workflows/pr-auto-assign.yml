@@ -12,6 +12,6 @@ jobs:
     if: ${{ github.event.pull_request.draft == false && github.actor != 'dependabot[bot]' }}
     steps:
       - name: execute
-        uses: kod-source/pr-auto-assign-action@v1
+        uses: ManabuSeki/pr-auto-assign-action@v1
         with:
           config_path: .github/auto_assign.yml
