@@ -1,7 +1,7 @@
 import cv2
 import function
 
-file_name = '10k.jpg'
+file_name = '1000k.jpg'
 
 # 線を引いた座標のリスト
 coordinate = []
