@@ -2,6 +2,7 @@ import cv2
 import numpy as np
 from pylsd.lsd import lsd
 
+
 # 画像の読み込み＆画像に線を引く処理 (横の線を取得)
 def input_image(file_name, coordinate):
     coordinate.clear()
