@@ -23,9 +23,8 @@ pip install "ocrd-fork-pylsd == 0.0.3"
 ```
 
 ### ImportError: cannot import name 'lsd' from 'lsd'
-
+このエラーが出たら下記のコマンドを入力する
 pip install opencv-contrib-python
-
 
 ## ディレクトリ構成
 ```
