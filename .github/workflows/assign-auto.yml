@@ -1,6 +1,6 @@
 me: Assign auto
 
-on: [pull_request]
+on: [push]
   # pull_request:
   #   types: opened
 
