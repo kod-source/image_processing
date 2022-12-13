@@ -1,8 +1,10 @@
 name: Assign auto
 
 on:
-  pull_request:
-    types: opened
+  pull_request_target:
+    types:
+      - opened
+      - ready_for_review
 
 jobs:
   assign:
@@ -23,8 +25,9 @@ jobs:
                  https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}/assignees
           fi
   add-reviews:
-    if: contains(github.event.pull_request.labels.*.name, 'gremlins') && contains(github.event.pull_request.labels.*.name, 'review request')
+    name: add-reviews
     runs-on: ubuntu-latest
+    if: ${{ github.event.pull_request.draft == false && github.actor != 'dependabot[bot]' }}
     steps:
       - uses: kentaro-m/auto-assign-action@v1.1.0
         with:
