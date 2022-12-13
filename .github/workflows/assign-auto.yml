@@ -1,4 +1,4 @@
-me: Assign auto
+name: Assign auto
 
 on:
   pull_request:
