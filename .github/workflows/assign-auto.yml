@@ -1,8 +1,10 @@
 name: Assign auto
 
 on:
-  pull_request:
-    # types: opened
+  pull_request_target:
+    types:
+      - opened
+      - ready_for_review
 
 jobs:
   assign:
