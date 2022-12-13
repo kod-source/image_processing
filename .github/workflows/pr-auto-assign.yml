@@ -7,12 +7,11 @@ on: [pull_request]
 #       - ready_for_review
 
 jobs:
-  pr-auto-assign:
-    name: pr-auto-assign
+  add-reviews:
+    if: contains(github.event.pull_request.labels.*.name, 'gremlins') && contains(github.event.pull_request.labels.*.name, 'review request')
     runs-on: ubuntu-latest
-    if: ${{ github.event.pull_request.draft == false && github.actor != 'dependabot[bot]' }}
     steps:
-      - name: execute
-        uses: ManabuSeki/pr-auto-assign-action@v1
+      - uses: kentaro-m/auto-assign-action@v1.1.0
         with:
-          config_path: .github/auto_assign.yml
+          repo-token: "${{ secrets.GITHUB_TOKEN }}"
+          configuration-path: ".github/auto_assign_gremlins.yml"
