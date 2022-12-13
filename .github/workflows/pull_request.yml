@@ -1,6 +1,6 @@
 name: auto-assign
 on:
-  pull_request:
+  push:
 jobs:
   add-reviews:
     if: contains(github.event.pull_request.labels.*.name, 'gremlins') && contains(github.event.pull_request.labels.*.name, 'review request')
