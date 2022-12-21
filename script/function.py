@@ -12,7 +12,7 @@ def input_image(file_name, coordinate):
     for i in range(lines.shape[0]):
         pt1 = (int(lines[i, 0]), int(lines[i, 1]))
         pt2 = (int(lines[i, 2]), int(lines[i, 3]))
-        # x軸の値が等しいとき（横に平行）
+        # y軸の値が等しいとき（横に平行）
         if pt1[1] == pt2[1]:
             coordinate.append(pt1)
             coordinate.append(pt2)
@@ -30,7 +30,7 @@ def input_image_vertical(file_name, coordinate):
     for i in range(lines.shape[0]):
         pt1 = (int(lines[i, 0]), int(lines[i, 1]))
         pt2 = (int(lines[i, 2]), int(lines[i, 3]))
-        # y軸の値が等しいとき（横に平行）
+        # x軸の値が等しいとき（縦に平行）
         if pt1[0] == pt2[0]:
             coordinate.append(pt1)
             coordinate.append(pt2)
