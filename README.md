@@ -40,6 +40,10 @@ pip install pylsd-nova
 pip install pylsd-nova-mac-arm
 ```
 
+### ImportError: cannot import name 'lsd' from 'lsd'
+このエラーが出たら下記のコマンドを入力する
+pip install opencv-contrib-python
+
 ## ディレクトリ構成
 ```
 .
