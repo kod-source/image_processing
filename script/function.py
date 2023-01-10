@@ -1,5 +1,6 @@
 import cv2
 import numpy as np
+import os
 from pylsd.lsd import lsd
 
 # 画像の読み込み＆画像に線を引く処理 (横の線を取得)
@@ -53,6 +54,26 @@ def input_all_image(file_name, coordinate):
         width = lines[i, 4]
         cv2.line(img, pt1, pt2, (0, 0, 255), int(np.ceil(width / 2)))
     return img
+
+# 画像の拡張子をjpgに変更する
+def change_extension(file_name):
+    img = cv2.imread("img/" + file_name)
+    # 拡張子を取り除くファイル名を取得する
+    file_path = os.path.splitext(os.path.basename(file_name))[0]
+    cv2.imwrite("img/" + file_path + ".jpg", img)
+
+# ネガポシ変換 (色を反転する処理)
+def conversion_negative_positive(file_name):
+    img = cv2.imread("img/" + file_name)
+    negative_img = cv2.bitwise_not(img)
+    cv2.imwrite("img/negative" + file_name, negative_img)
+
+# 画像の輝度自動調整
+def brightness_adjustment(file_name):
+    img = cv2.imread("img/" + file_name, 0)
+    clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8,8))
+    new_img = clahe.apply(img)
+    cv2.imwrite('img/brightness_' + file_name, new_img)
 
 # マイナスの値をプラスの値に変換
 def minus_int_to_plus(i):
