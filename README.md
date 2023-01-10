@@ -17,9 +17,19 @@ pip install opencv-contrib-python
 pip install pylsd
 ```
 ↑はpython3に対応していないので、
-python3の方は対応させた別バージョン
+python3に対応させた別バージョンは下記のコマンドでインストールする
 ```
 pip install "ocrd-fork-pylsd == 0.0.3"
+```
+※既に `pip install pylsd` でpylsdをインストールしてしまっていると名前衝突が起きてしまうことがあるので削除を推奨します。
+上記のコマンドを実行してもPylsdがインストールされていないエラーが出るケースが稀にある
+そのような時は、既にインストールしているPylsdを削除して下記のフォーク版を試す
+```
+pip install pylsd-nova
+```
+* Apple SiliconのMacを使用している場合はARM版をインストールすること
+```
+pip install pylsd-nova-mac-arm
 ```
 
 ## ディレクトリ構成
@@ -32,9 +42,7 @@ pip install "ocrd-fork-pylsd == 0.0.3"
 
 ## 実行方法
 - scriptフォルダー配下にあるファイルを指定する
-- 第1引数にファイル名を指定する
-- 第2引数に倍率の真値を指定する （真値がわからない時は指定しなくても良い）
 ```
-python script/click_script.py 10k.jpg 10000
+python script/click_script.py
 ```
 
