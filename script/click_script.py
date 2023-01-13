@@ -46,12 +46,9 @@ def show_image(show_img, x, y):
         result = function.diameter_calculate(l)
         diff = function.calculation_diff(10000, result)
         diameter_results.append(result)
-        average = function.calculation_average(diameter_results)
-        pos_average_str='(average)=('+str(average)+')'
         pos_result_str='(result'+str(count)+')=('+str(result)+')'
         pos_diff_str='(diff'+str(count)+')=('+str(diff)+')'
         count += 1
-        cv2.putText(show_img,pos_average_str,(x_shaft, 200),cv2.FONT_HERSHEY_PLAIN,2,255,2,cv2.LINE_AA)
         cv2.putText(show_img,pos_result_str,(x_shaft, y_shaft),cv2.FONT_HERSHEY_PLAIN,2,255,2,cv2.LINE_AA)
         cv2.putText(show_img,pos_diff_str,(x_shaft, y_shaft + 35),cv2.FONT_HERSHEY_PLAIN,2,255,2,cv2.LINE_AA)
     cv2.imshow('window', show_img)
@@ -66,4 +63,8 @@ cv2.imshow('window', img)
 cv2.setMouseCallback('window', click_pos)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
+# 処理が終了したら平均値を表示する
+average = function.calculation_average(diameter_results)
+pos_average_str='(average)=('+str(average)+')'
+cv2.putText(img,pos_average_str,(1600, 200),cv2.FONT_HERSHEY_PLAIN,2,255,2,cv2.LINE_AA)
 cv2.imwrite("result/click_" + file_name, img)

@@ -71,4 +71,4 @@ def calculation_diff(theory, value):
 
 # 平均値を求める
 def calculation_average(results):
-    return sum(results) / len(results)
+    return round(sum(results) / len(results), 2)
