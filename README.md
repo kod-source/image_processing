@@ -62,7 +62,7 @@ pip install pylsd-nova-mac-arm
     1. 2点をクリックすると下記のように倍率と誤差率を表示している
     1. `result`には倍率の測定結果、`diff`には誤差率を表示している（今後日本語の表示にも対応する予定） 
     <br /><img width="300" height="300" alt="image" src="https://user-images.githubusercontent.com/74532799/211552984-7b830723-f954-4494-89f6-2e5f1294c58a.png">
-
+1. 画像を閉じると処理が終了し、`result`ディレクトリに画像が保存される。
 
 
 
