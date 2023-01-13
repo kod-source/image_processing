@@ -11,6 +11,8 @@ img = function.input_image(file_name, coordinate)
 show_result_coordinates = []
 # 何回目かを示すための値
 count = 1
+# 全ての倍率結果の値のリスト
+diameter_results = []
 
 def show_image(show_img, x, y):
     global count
@@ -43,9 +45,13 @@ def show_image(show_img, x, y):
         l = function.minus_int_to_plus(show_result_coordinates[length-2][1] - show_result_coordinates[length-1][1])
         result = function.diameter_calculate(l)
         diff = function.calculation_diff(10000, result)
+        diameter_results.append(result)
+        average = function.calculation_average(diameter_results)
+        pos_average_str='(average)=('+str(average)+')'
         pos_result_str='(result'+str(count)+')=('+str(result)+')'
         pos_diff_str='(diff'+str(count)+')=('+str(diff)+')'
         count += 1
+        cv2.putText(show_img,pos_average_str,(x_shaft, 200),cv2.FONT_HERSHEY_PLAIN,2,255,2,cv2.LINE_AA)
         cv2.putText(show_img,pos_result_str,(x_shaft, y_shaft),cv2.FONT_HERSHEY_PLAIN,2,255,2,cv2.LINE_AA)
         cv2.putText(show_img,pos_diff_str,(x_shaft, y_shaft + 35),cv2.FONT_HERSHEY_PLAIN,2,255,2,cv2.LINE_AA)
     cv2.imshow('window', show_img)
