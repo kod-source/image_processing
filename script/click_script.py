@@ -11,6 +11,8 @@ img = function.input_image(file_name, coordinate)
 show_result_coordinates = []
 # 何回目かを示すための値
 count = 1
+# 全ての倍率結果の値のリスト
+diameter_results = []
 
 def show_image(show_img, x, y):
     global count
@@ -43,6 +45,7 @@ def show_image(show_img, x, y):
         l = function.minus_int_to_plus(show_result_coordinates[length-2][1] - show_result_coordinates[length-1][1])
         result = function.diameter_calculate(l)
         diff = function.calculation_diff(10000, result)
+        diameter_results.append(result)
         pos_result_str='(result'+str(count)+')=('+str(result)+')'
         pos_diff_str='(diff'+str(count)+')=('+str(diff)+')'
         count += 1
@@ -60,4 +63,6 @@ cv2.imshow('window', img)
 cv2.setMouseCallback('window', click_pos)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
+# 処理が終了したら平均値を表示する
+function.show_average(img, diameter_results)
 cv2.imwrite("result/click_" + file_name, img)
