@@ -4,3 +4,4 @@ result/*
 !result/result_*
 img/brightness*
 img/gamma*
+.DS_Store
