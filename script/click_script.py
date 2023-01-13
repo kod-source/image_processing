@@ -64,7 +64,5 @@ cv2.setMouseCallback('window', click_pos)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 # 処理が終了したら平均値を表示する
-average = function.calculation_average(diameter_results)
-pos_average_str='(average)=('+str(average)+')'
-cv2.putText(img,pos_average_str,(1600, 200),cv2.FONT_HERSHEY_PLAIN,2,255,2,cv2.LINE_AA)
+function.show_average(img, diameter_results)
 cv2.imwrite("result/click_" + file_name, img)

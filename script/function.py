@@ -72,3 +72,9 @@ def calculation_diff(theory, value):
 # 平均値を求める
 def calculation_average(results):
     return round(sum(results) / len(results), 2)
+
+# 平均値を画像上に表示する
+def show_average(img, results):
+    average = calculation_average(results)
+    pos_average_str='(average)=('+str(average)+')'
+    cv2.putText(img,pos_average_str,(1600, 200),cv2.FONT_HERSHEY_PLAIN,2,255,2,cv2.LINE_AA)
