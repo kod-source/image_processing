@@ -13,7 +13,7 @@ def input_image(file_name, coordinate):
     for i in range(lines.shape[0]):
         pt1 = (int(lines[i, 0]), int(lines[i, 1]))
         pt2 = (int(lines[i, 2]), int(lines[i, 3]))
-        # x軸の値が等しいとき（横に平行）
+        # y軸の値が等しいとき（横に平行）
         if pt1[1] == pt2[1]:
             coordinate.append(pt1)
             coordinate.append(pt2)
@@ -31,7 +31,7 @@ def input_image_vertical(file_name, coordinate):
     for i in range(lines.shape[0]):
         pt1 = (int(lines[i, 0]), int(lines[i, 1]))
         pt2 = (int(lines[i, 2]), int(lines[i, 3]))
-        # y軸の値が等しいとき（横に平行）
+        # x軸の値が等しいとき（縦に平行）
         if pt1[0] == pt2[0]:
             coordinate.append(pt1)
             coordinate.append(pt2)
@@ -89,3 +89,13 @@ def diameter_calculate(l):
 # 誤差率を計算する ((測定値 - 真値) ÷ 真値) × 100 [%]
 def calculation_diff(theory, value):
     return round(((value - theory) / theory) * 100, 3)
+
+# 平均値を求める
+def calculation_average(results):
+    return round(sum(results) / len(results), 2)
+
+# 平均値を画像上に表示する
+def show_average(img, results):
+    average = calculation_average(results)
+    pos_average_str='(average)=('+str(average)+')'
+    cv2.putText(img,pos_average_str,(1600, 200),cv2.FONT_HERSHEY_PLAIN,2,255,2,cv2.LINE_AA)
