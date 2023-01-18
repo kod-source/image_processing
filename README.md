@@ -55,7 +55,7 @@ pip install pylsd-nova-mac-arm
 1. scriptフォルダー配下にあるファイルを指定して実行する
     1. 下記のコマンドでpythonを実行する（ファイル名は適宜合わせること）
     ```
-    python script/click_script.py
+    python script/main.py
     ```
 1. 下記のように線文が検出された画像であるか確認する
     <br /><img width="300" height="300" alt="image" src="https://user-images.githubusercontent.com/74532799/211551926-929b27d6-c826-45c7-a8bf-9de8e2a93066.png">
