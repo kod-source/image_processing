@@ -4,9 +4,9 @@ import os
 from pylsd.lsd import lsd
 
 # 画像に線を引く処理 (横の線を取得)
-def input_image(gray_img, coordinate):
+def input_image(gray_img, coordinates):
     img = cv2.cvtColor(gray_img, cv2.COLOR_GRAY2RGB)
-    coordinate.clear()
+    coordinates.clear()
     lines = lsd(gray_img)
     # 画像に線を引く処理
     for i in range(lines.shape[0]):
@@ -14,16 +14,16 @@ def input_image(gray_img, coordinate):
         pt2 = (int(lines[i, 2]), int(lines[i, 3]))
         # y軸の値が等しいとき（横に平行）
         if pt1[1] == pt2[1]:
-            coordinate.append(pt1)
-            coordinate.append(pt2)
+            coordinates.append(pt1)
+            coordinates.append(pt2)
             width = lines[i, 4]
             cv2.line(img, pt1, pt2, (0, 0, 255), int(np.ceil(width / 2)))
     return img
 
 # 画像に線を引く処理 (縦の線を取得)
-def input_image_vertical(gray_img, coordinate):
+def input_image_vertical(gray_img, coordinates):
     img = cv2.cvtColor(gray_img, cv2.COLOR_GRAY2RGB)
-    coordinate.clear()
+    coordinates.clear()
     lines = lsd(gray_img)
     # 画像に線を引く処理
     for i in range(lines.shape[0]):
@@ -31,23 +31,23 @@ def input_image_vertical(gray_img, coordinate):
         pt2 = (int(lines[i, 2]), int(lines[i, 3]))
         # x軸の値が等しいとき（縦に平行）
         if pt1[0] == pt2[0]:
-            coordinate.append(pt1)
-            coordinate.append(pt2)
+            coordinates.append(pt1)
+            coordinates.append(pt2)
             width = lines[i, 4]
             cv2.line(img, pt1, pt2, (0, 0, 255), int(np.ceil(width / 2)))
     return img
 
 # 画像の読み込み＆画像に線を引く処理 (全ての線を取得)
-def input_all_image(gray_img, coordinate):
+def input_all_image(gray_img, coordinates):
     img = cv2.cvtColor(gray_img, cv2.COLOR_GRAY2RGB)
-    coordinate.clear()
+    coordinates.clear()
     lines = lsd(gray_img)
     # 画像に線を引く処理
     for i in range(lines.shape[0]):
         pt1 = (int(lines[i, 0]), int(lines[i, 1]))
         pt2 = (int(lines[i, 2]), int(lines[i, 3]))
-        coordinate.append(pt1)
-        coordinate.append(pt2)
+        coordinates.append(pt1)
+        coordinates.append(pt2)
         width = lines[i, 4]
         cv2.line(img, pt1, pt2, (0, 0, 255), int(np.ceil(width / 2)))
     return img

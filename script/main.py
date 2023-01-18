@@ -6,16 +6,21 @@ import const
 # 何回目かを示すための値
 count = 1
 
+def main():
+    is_vertical = False
+    params = define_params(is_vertical)
+    output(params)
+
 def define_params(is_vertical):
     if not os.path.isfile(const.FILE_PATH):
         raise FileNotFoundError('Image file not found!')
     gray_img = cv2.imread(const.FILE_PATH, 0)
     # 線を引いた座標のリスト
-    coordinate = []
+    coordinates = []
     # 画像の輝度の自動調整
     gray_brightness_adjustment_img = function.brightness_adjustment(gray_img)
     # 画像に線を引く
-    img = function.input_image_vertical(gray_brightness_adjustment_img, coordinate) if is_vertical else function.input_image(gray_brightness_adjustment_img, coordinate)
+    img = function.input_image_vertical(gray_brightness_adjustment_img, coordinates) if is_vertical else function.input_image(gray_brightness_adjustment_img, coordinates)
     # 計算結果を求めるための必要な座標のリスト
     show_result_coordinates = []
     # 全ての倍率結果の値のリスト
@@ -23,7 +28,7 @@ def define_params(is_vertical):
 
     params = {
         "img": img,
-        "coordinate": coordinate,
+        "coordinates": coordinates,
         "show_result_coordinates": show_result_coordinates,
         "diameter_results": diameter_results,
         "is_vertical": is_vertical,
@@ -34,7 +39,7 @@ def show_image(show_img, x, y, params):
     global count
     # x軸で曖昧検索でfilterする
     filter_coordinate = []
-    for list in params["coordinate"]:
+    for list in params["coordinates"]:
         if int(x) - 5 <= list[0] <= int(x) + 5:
             filter_coordinate.append(list)
     # y軸で曖昧検索でfilterする
@@ -85,11 +90,6 @@ def output(params):
     function.show_average(params["img"], params["diameter_results"])
     result_name = "result/click_vertical_" if params["is_vertical"] else "result/click_"
     cv2.imwrite(result_name + const.FILE_NAME, params["img"])
-
-def main():
-    is_vertical = False
-    params = define_params(is_vertical)
-    output(params)
 
 if __name__ == '__main__':
     main()
