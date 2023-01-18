@@ -8,6 +8,8 @@ if not os.path.isfile(file_path):
     raise FileNotFoundError('Image file not found!')
 gray_img = cv2.imread(file_path, 0)
 
+# 希望値（誤差率の計算で使用）
+desired_value = 10000
 # 線を引いた座標のリスト
 coordinate = []
 # 画像の輝度の自動調整
@@ -51,7 +53,7 @@ def show_image(show_img, x, y):
         y_shaft = 200 + length * 40
         l = function.minus_int_to_plus(show_result_coordinates[length-2][1] - show_result_coordinates[length-1][1])
         result = function.diameter_calculate(l)
-        diff = function.calculation_diff(10000, result)
+        diff = function.calculation_diff(desired_value, result)
         diameter_results.append(result)
         pos_result_str='(result'+str(count)+')=('+str(result)+')'
         pos_diff_str='(diff'+str(count)+')=('+str(diff)+')'
