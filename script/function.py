@@ -3,12 +3,11 @@ import numpy as np
 import os
 from pylsd.lsd import lsd
 
-# 画像の読み込み＆画像に線を引く処理 (横の線を取得)
-def input_image(file_name, coordinate):
+# 画像に線を引く処理 (横の線を取得)
+def input_image(gray_img, coordinate):
+    img = cv2.cvtColor(gray_img, cv2.COLOR_GRAY2RGB)
     coordinate.clear()
-    img = cv2.imread("img/" + file_name)
-    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    lines = lsd(gray)
+    lines = lsd(gray_img)
     # 画像に線を引く処理
     for i in range(lines.shape[0]):
         pt1 = (int(lines[i, 0]), int(lines[i, 1]))
@@ -21,12 +20,11 @@ def input_image(file_name, coordinate):
             cv2.line(img, pt1, pt2, (0, 0, 255), int(np.ceil(width / 2)))
     return img
 
-# 画像の読み込み＆画像に線を引く処理 (縦の線を取得)
-def input_image_vertical(file_name, coordinate):
+# 画像に線を引く処理 (縦の線を取得)
+def input_image_vertical(gray_img, coordinate):
+    img = cv2.cvtColor(gray_img, cv2.COLOR_GRAY2RGB)
     coordinate.clear()
-    img = cv2.imread("img/" + file_name)
-    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    lines = lsd(gray)
+    lines = lsd(gray_img)
     # 画像に線を引く処理
     for i in range(lines.shape[0]):
         pt1 = (int(lines[i, 0]), int(lines[i, 1]))
@@ -40,11 +38,10 @@ def input_image_vertical(file_name, coordinate):
     return img
 
 # 画像の読み込み＆画像に線を引く処理 (全ての線を取得)
-def input_all_image(file_name, coordinate):
+def input_all_image(gray_img, coordinate):
+    img = cv2.cvtColor(gray_img, cv2.COLOR_GRAY2RGB)
     coordinate.clear()
-    img = cv2.imread("img/" + file_name)
-    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    lines = lsd(gray)
+    lines = lsd(gray_img)
     # 画像に線を引く処理
     for i in range(lines.shape[0]):
         pt1 = (int(lines[i, 0]), int(lines[i, 1]))
@@ -69,11 +66,10 @@ def conversion_negative_positive(file_name):
     cv2.imwrite("img/negative" + file_name, negative_img)
 
 # 画像の輝度自動調整
-def brightness_adjustment(file_name):
-    img = cv2.imread("img/" + file_name, 0)
+def brightness_adjustment(gray_img):
     clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8,8))
-    new_img = clahe.apply(img)
-    cv2.imwrite('img/brightness_' + file_name, new_img)
+    new_img = clahe.apply(gray_img)
+    return new_img
 
 # マイナスの値をプラスの値に変換
 def minus_int_to_plus(i):
@@ -96,6 +92,7 @@ def calculation_average(results):
 
 # 平均値を画像上に表示する
 def show_average(img, results):
-    average = calculation_average(results)
-    pos_average_str='(average)=('+str(average)+')'
-    cv2.putText(img,pos_average_str,(1600, 200),cv2.FONT_HERSHEY_PLAIN,2,255,2,cv2.LINE_AA)
+    if len(results) >= 2:
+        average = calculation_average(results)
+        pos_average_str='(average)=('+str(average)+')'
+        cv2.putText(img,pos_average_str,(1600, 200),cv2.FONT_HERSHEY_PLAIN,2,255,2,cv2.LINE_AA)

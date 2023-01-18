@@ -2,6 +2,5 @@ script/__pycache__
 result/*
 !result/result_10k.jpg
 !result/result_*
-img/brightness*
 img/gamma*
 .DS_Store

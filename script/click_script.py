@@ -1,14 +1,19 @@
+import os
 import cv2
 import function
 
 file_name = '10k.jpg'
+file_path = "img/" + file_name
+if not os.path.isfile(file_path):
+    raise FileNotFoundError('Image file not found!')
+gray_img = cv2.imread(file_path, 0)
 
 # 線を引いた座標のリスト
 coordinate = []
 # 画像の輝度の自動調整
-function.brightness_adjustment(file_name)
-# 画像データの読み込み＆画像に線を引く
-img = function.input_image("brightness_" + file_name, coordinate)
+gray_brightness_adjustment_img = function.brightness_adjustment(gray_img)
+# 画像に線を引く
+img = function.input_image(gray_brightness_adjustment_img, coordinate)
 # 計算結果を求めるための必要な座標のリスト
 show_result_coordinates = []
 # 何回目かを示すための値
