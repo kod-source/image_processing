@@ -2,6 +2,7 @@ import cv2
 import numpy as np
 import os
 from pylsd.lsd import lsd
+from statistics import stdev
 
 # 画像に線を引く処理 (横の線を取得)
 def input_image(gray_img, coordinates):
@@ -96,3 +97,14 @@ def show_average(img, results):
         average = calculation_average(results)
         pos_average_str='(average)=('+str(average)+')'
         cv2.putText(img,pos_average_str,(1600, 200),cv2.FONT_HERSHEY_PLAIN,2,255,2,cv2.LINE_AA)
+
+# 標準偏差を求める
+def calculation_standard_deviation(results):
+    std = stdev(results)
+    return round(std, 2)
+
+# 標準偏差を画像上に表示する
+def show_standard_deviation(img, results):
+    standard_deviation = calculation_standard_deviation(results)
+    pos_standard_deviation_str='(deviation)=('+str(standard_deviation)+')'
+    cv2.putText(img,pos_standard_deviation_str,(1600, 235),cv2.FONT_HERSHEY_PLAIN,2,255,2,cv2.LINE_AA)

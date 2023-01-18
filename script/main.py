@@ -86,8 +86,9 @@ def output(params):
     cv2.setMouseCallback('window', click_pos, params)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
-    # 処理が終了したら平均値を表示する
+    # 処理が終了したら平均値と標準偏差を表示する
     function.show_average(params["img"], params["diameter_results"])
+    function.show_standard_deviation(params["img"], params["diameter_results"])
     result_name = "result/click_vertical_" if params["is_vertical"] else "result/click_"
     cv2.imwrite(result_name + const.FILE_NAME, params["img"])
 
