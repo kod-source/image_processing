@@ -1,33 +1,40 @@
 import os
 import cv2
 import function
+import const
 
-file_name = '10k.jpg'
-file_path = "img/" + file_name
-if not os.path.isfile(file_path):
-    raise FileNotFoundError('Image file not found!')
-gray_img = cv2.imread(file_path, 0)
-
-# 希望値（誤差率の計算で使用）
-desired_value = 10000
-# 線を引いた座標のリスト
-coordinate = []
-# 画像の輝度の自動調整
-gray_brightness_adjustment_img = function.brightness_adjustment(gray_img)
-# 画像に線を引く
-img = function.input_image(gray_brightness_adjustment_img, coordinate)
-# 計算結果を求めるための必要な座標のリスト
-show_result_coordinates = []
 # 何回目かを示すための値
 count = 1
-# 全ての倍率結果の値のリスト
-diameter_results = []
 
-def show_image(show_img, x, y):
+def define_params(is_vertical):
+    if not os.path.isfile(const.FILE_PATH):
+        raise FileNotFoundError('Image file not found!')
+    gray_img = cv2.imread(const.FILE_PATH, 0)
+    # 線を引いた座標のリスト
+    coordinate = []
+    # 画像の輝度の自動調整
+    gray_brightness_adjustment_img = function.brightness_adjustment(gray_img)
+    # 画像に線を引く
+    img = function.input_image_vertical(gray_brightness_adjustment_img, coordinate) if is_vertical else function.input_image(gray_brightness_adjustment_img, coordinate)
+    # 計算結果を求めるための必要な座標のリスト
+    show_result_coordinates = []
+    # 全ての倍率結果の値のリスト
+    diameter_results = []
+
+    params = {
+        "img": img,
+        "coordinate": coordinate,
+        "show_result_coordinates": show_result_coordinates,
+        "diameter_results": diameter_results,
+        "is_vertical": is_vertical,
+    }
+    return params
+
+def show_image(show_img, x, y, params):
     global count
     # x軸で曖昧検索でfilterする
     filter_coordinate = []
-    for list in coordinate:
+    for list in params["coordinate"]:
         if int(x) - 5 <= list[0] <= int(x) + 5:
             filter_coordinate.append(list)
     # y軸で曖昧検索でfilterする
@@ -39,7 +46,7 @@ def show_image(show_img, x, y):
     # 条件にヒットする座標が複数ある時は処理を終了
     if len(new_filter_coordinate) != 1:
         return
-    show_result_coordinates.append(new_filter_coordinate[0])
+    params["show_result_coordinates"].append(new_filter_coordinate[0])
 
     # クリックした座標を表示する
     cv2.circle(show_img, center=(new_filter_coordinate[0][0], new_filter_coordinate[0][1]), radius=5, color=255, thickness=-1)
@@ -47,14 +54,15 @@ def show_image(show_img, x, y):
     cv2.putText(show_img, pos_str, (new_filter_coordinate[0][0]+10, new_filter_coordinate[0][1]+10), cv2.FONT_HERSHEY_PLAIN,2,255,2,cv2.LINE_AA)
 
     # 計算結果の表示（答え）
-    length = len(show_result_coordinates)
+    length = len(params["show_result_coordinates"])
     if length > 0 and length % 2 == 0:
         x_shaft = 1600
         y_shaft = 200 + length * 40
-        l = function.minus_int_to_plus(show_result_coordinates[length-2][1] - show_result_coordinates[length-1][1])
+        var = 0 if params["is_vertical"] else 1
+        l = function.minus_int_to_plus(params["show_result_coordinates"][length-2][var] - params["show_result_coordinates"][length-1][var])
         result = function.diameter_calculate(l)
-        diff = function.calculation_diff(desired_value, result)
-        diameter_results.append(result)
+        diff = function.calculation_diff(const.DESIRED_VALUE, result)
+        params["diameter_results"].append(result)
         pos_result_str='(result'+str(count)+')=('+str(result)+')'
         pos_diff_str='(diff'+str(count)+')=('+str(diff)+')'
         count += 1
@@ -65,13 +73,23 @@ def show_image(show_img, x, y):
 # クリックしたら座標の位置を表示する処理
 def click_pos(event, x, y, flags, params):
     if event == cv2.EVENT_LBUTTONDOWN:
-        show_image(img, x, y)
+        show_image(params["img"], x, y, params)
 
-cv2.namedWindow('window', cv2.WINDOW_NORMAL)
-cv2.imshow('window', img)
-cv2.setMouseCallback('window', click_pos)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-# 処理が終了したら平均値を表示する
-function.show_average(img, diameter_results)
-cv2.imwrite("result/click_" + file_name, img)
+def output(params):
+    cv2.namedWindow('window', cv2.WINDOW_NORMAL)
+    cv2.imshow('window', params["img"])
+    cv2.setMouseCallback('window', click_pos, params)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
+    # 処理が終了したら平均値を表示する
+    function.show_average(params["img"], params["diameter_results"])
+    result_name = "result/click_vertical_" if params["is_vertical"] else "result/click_"
+    cv2.imwrite(result_name + const.FILE_NAME, params["img"])
+
+def main():
+    is_vertical = False
+    params = define_params(is_vertical)
+    output(params)
+
+if __name__ == '__main__':
+    main()
