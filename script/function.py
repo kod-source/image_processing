@@ -89,6 +89,8 @@ def calculation_diff(theory, value):
 
 # 平均値を求める
 def calculation_average(results):
+    if len(results) < 2:
+        return
     return round(sum(results) / len(results), 2)
 
 # 平均値を画像上に表示する
@@ -101,6 +103,8 @@ def show_average(img, results):
 
 # 標準偏差を求める
 def calculation_standard_deviation(results):
+    if len(results) < 2:
+        return
     std = stdev(results)
     return round(std, 2)
 
