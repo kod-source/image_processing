@@ -21,7 +21,9 @@ def define_params(is_vertical):
     # 画像に線を引く
     img = (
         function.input_image_vertical(gray_brightness_adjustment_img, coordinates)
-        if is_vertical else function.input_image(gray_brightness_adjustment_img, coordinates))
+        if is_vertical
+        else function.input_image(gray_brightness_adjustment_img, coordinates)
+    )
     # 計算結果を求めるための必要な座標のリスト
     show_result_coordinates = []
     # 全ての倍率結果の値のリスト

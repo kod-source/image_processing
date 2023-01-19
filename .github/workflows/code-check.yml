@@ -28,4 +28,3 @@ jobs:
 
       - name: code_check
         run: black --check .
-
