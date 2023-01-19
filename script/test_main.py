@@ -40,7 +40,7 @@ class TestFilterCoordinatesByPosition(unittest.TestCase):
         coordinates = [(100, 100), (105, 105), (110, 110), (115, 115), (120, 120)]
         x = 105
         y = 108
-        expected = [(105, 105), (110, 1100)]
+        expected = [(105, 105), (110, 110)]
         result = main.filter_coordinates_by_position(x, y, coordinates)
         self.assertEqual(result, expected)
 
