@@ -32,28 +32,33 @@ def define_params(is_vertical):
     }
     return params
 
+def filter_coordinates_by_position(x, y, coordinates):
+    # x軸で曖昧検索でfilterする
+    filter_coordinates = []
+    for list in coordinates:
+        if int(x) - 5 <= list[0] <= int(x) + 5:
+            filter_coordinates.append(list)
+    # y軸で曖昧検索でfilterする
+    new_filter_coordinates = []
+    for list in filter_coordinates:
+        if int(y) - 5 <= list[1] <= int(y) + 5:
+            new_filter_coordinates.append(list)
+    return new_filter_coordinates
+
 def show_image(show_img, x, y, params):
     global count
-    # x軸で曖昧検索でfilterする
-    filter_coordinate = []
-    for list in params["coordinates"]:
-        if int(x) - 5 <= list[0] <= int(x) + 5:
-            filter_coordinate.append(list)
-    # y軸で曖昧検索でfilterする
-    new_filter_coordinate = []
-    for list in filter_coordinate:
-        if int(y) - 5 <= list[1] <= int(y) + 5:
-            new_filter_coordinate.append(list)
+    # クリックした位置で座標が存在するか確認する
+    filter_coordinates = filter_coordinates_by_position(x, y, params["coordinates"])
 
     # 条件にヒットする座標が複数ある時は処理を終了
-    if len(new_filter_coordinate) != 1:
+    if len(filter_coordinates) != 1:
         return
-    params["show_result_coordinates"].append(new_filter_coordinate[0])
+    params["show_result_coordinates"].append(filter_coordinates[0])
 
     # クリックした座標を表示する
-    cv2.circle(show_img, center=(new_filter_coordinate[0][0], new_filter_coordinate[0][1]), radius=5, color=255, thickness=-1)
-    pos_str=''+str(count)+'(x,y)=('+str(new_filter_coordinate[0][0])+','+str(new_filter_coordinate[0][1])+')'
-    cv2.putText(show_img, pos_str, (new_filter_coordinate[0][0]+10, new_filter_coordinate[0][1]+10), cv2.FONT_HERSHEY_PLAIN,2,255,2,cv2.LINE_AA)
+    cv2.circle(show_img, center=(filter_coordinates[0][0], filter_coordinates[0][1]), radius=5, color=255, thickness=-1)
+    pos_str=''+str(count)+'(x,y)=('+str(filter_coordinates[0][0])+','+str(filter_coordinates[0][1])+')'
+    cv2.putText(show_img, pos_str, (filter_coordinates[0][0]+10, filter_coordinates[0][1]+10), cv2.FONT_HERSHEY_PLAIN,2,255,2,cv2.LINE_AA)
 
     # 計算結果の表示（答え）
     length = len(params["show_result_coordinates"])
