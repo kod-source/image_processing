@@ -2,6 +2,7 @@ import unittest
 import cv2
 import numpy as np
 import function
+
 class TestShowAverage(unittest.TestCase):
     def test_show_average_with_valid_input(self):
         img = cv2.imread(file_path)
@@ -96,10 +97,8 @@ class TestBrightnessAdjustment(unittest.TestCase):
 
         # Test the function
         new_img = function.brightness_adjustment(gray_img)
-
         # Check that the maximum value of the new image is less than or equal to 255
         self.assertLessEqual(np.max(new_img), 255)
-
         # Check that the minimum value of the new image is greater than or equal to 0
         self.assertGreaterEqual(np.min(new_img), 0)
 
@@ -107,13 +106,10 @@ class TestInputImage(unittest.TestCase):
     def test_input_image(self):
         # Create an image with a gradient of pixel values
         gray_img = cv2.imread(file_path, 0)
-
         # define the list to store the coordinates
         coordinates = []
-
         # Test the function
         function.input_image(gray_img, coordinates)
-
         # check if the line segment is acquired.
         self.assertNotEqual(len(coordinates), 0)
 
@@ -121,13 +117,10 @@ class TestInputImageVertical(unittest.TestCase):
     def test_input_image_vertical(self):
         # Create an image with a gradient of pixel values
         gray_img = cv2.imread(file_path, 0)
-
         # define the list to store the coordinates
         coordinates = []
-
         # Test the function
         function.input_image_vertical(gray_img, coordinates)
-
         # check if the line segment is acquired.
         self.assertNotEqual(len(coordinates), 0)
 
@@ -135,13 +128,10 @@ class TestInputImageAll(unittest.TestCase):
     def test_input_image_all(self):
         # Create an image with a gradient of pixel values
         gray_img = cv2.imread(file_path, 0)
-
         # define the list to store the coordinates
         coordinates = []
-
         # Test the function
         function.input_all_image(gray_img, coordinates)
-
         # check if the line segment is acquired.
         self.assertNotEqual(len(coordinates), 0)
 
