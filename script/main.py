@@ -3,9 +3,6 @@ import cv2
 import function
 import const
 
-# 何回目かを示すための値
-count = 1
-
 def main():
     is_vertical = False
     params = define_params(is_vertical)
@@ -93,4 +90,6 @@ def output(params):
     cv2.imwrite(result_name + const.FILE_NAME, params["img"])
 
 if __name__ == '__main__':
+    # 何回目かを示すための値
+    count = 1
     main()
