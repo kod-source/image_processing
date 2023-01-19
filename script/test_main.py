@@ -35,9 +35,16 @@ class TestDefineParams(unittest.TestCase):
         with self.assertRaises(FileNotFoundError):
             main.define_params(True)
 
+
 class TestFilterCoordinatesByPosition(unittest.TestCase):
     def test_filter_coordinates_by_position(self):
-        coordinates = [(100, 100), (105, 105), (110, 110), (115, 115), (120, 120)]
+        coordinates = [
+            (100, 100),
+            (105, 105),
+            (110, 110),
+            (115, 115),
+            (120, 120),
+        ]
         x = 105
         y = 108
         expected = [(105, 105), (110, 110)]
@@ -45,13 +52,20 @@ class TestFilterCoordinatesByPosition(unittest.TestCase):
         self.assertEqual(result, expected)
 
     def test_filter_coordinates_by_position_no_result(self):
-        coordinates = [(100, 100), (105, 105), (110, 110), (115, 115), (120, 120)]
+        coordinates = [
+            (100, 100),
+            (105, 105),
+            (110, 110),
+            (115, 115),
+            (120, 120),
+        ]
         x = 150
         y = 150
         expected = []
         result = main.filter_coordinates_by_position(x, y, coordinates)
         self.assertEqual(result, expected)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main.const.FILE_PATH = "example.png"
     unittest.main()

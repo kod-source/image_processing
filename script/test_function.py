@@ -3,13 +3,14 @@ import cv2
 import numpy as np
 import function
 
+
 class TestShowAverage(unittest.TestCase):
     def test_show_average_with_valid_input(self):
         img = cv2.imread(file_path)
         results = [1, 2, 3, 4, 5]
         function.show_average(img, results)
         average = function.calculation_average(results)
-        pos_average_str='(average)=('+str(average)+')'
+        pos_average_str = "(average)=(" + str(average) + ")"
         (w, h), baseline = cv2.getTextSize(pos_average_str, cv2.FONT_HERSHEY_PLAIN, 2, 2)
         self.assertEqual((w, h), (252, 19))
         self.assertEqual(baseline, 11)
@@ -17,6 +18,7 @@ class TestShowAverage(unittest.TestCase):
     def test_calculation_average_with_valid_input(self):
         results = [1, 2, 3, 4, 5]
         self.assertEqual(function.calculation_average(results), 3.0)
+
 
 # 平均値を求めるテストコード
 class TestCalculationAverage(unittest.TestCase):
@@ -37,6 +39,7 @@ class TestCalculationAverage(unittest.TestCase):
         results = [5]
         self.assertIsNone(function.calculation_average(results))
 
+
 # 標準偏差を求めるテストコード
 class TestCalculationStandardDeviation(unittest.TestCase):
     def test_calculation_standard_deviation(self):
@@ -55,6 +58,7 @@ class TestCalculationStandardDeviation(unittest.TestCase):
         # Test with a list of length 1
         results = [5]
         self.assertIsNone(function.calculation_standard_deviation(results))
+
 
 # 倍率を測定するテストコード
 class TestDiameterCalculate(unittest.TestCase):
@@ -75,6 +79,7 @@ class TestDiameterCalculate(unittest.TestCase):
         l = -10
         self.assertEqual(function.diameter_calculate(l), -1358.53)
 
+
 # マイナスの値をプラスの値に変換のテストコード
 class TestMinusIntToPlus(unittest.TestCase):
     def test_minus_int_to_plus(self):
@@ -90,6 +95,7 @@ class TestMinusIntToPlus(unittest.TestCase):
         i = 0
         self.assertEqual(function.minus_int_to_plus(i), 0)
 
+
 class TestBrightnessAdjustment(unittest.TestCase):
     def test_brightness_adjustment(self):
         # Create an image with a gradient of pixel values
@@ -102,6 +108,7 @@ class TestBrightnessAdjustment(unittest.TestCase):
         # Check that the minimum value of the new image is greater than or equal to 0
         self.assertGreaterEqual(np.min(new_img), 0)
 
+
 class TestInputImage(unittest.TestCase):
     def test_input_image(self):
         # Create an image with a gradient of pixel values
@@ -112,6 +119,7 @@ class TestInputImage(unittest.TestCase):
         function.input_image(gray_img, coordinates)
         # check if the line segment is acquired.
         self.assertNotEqual(len(coordinates), 0)
+
 
 class TestInputImageVertical(unittest.TestCase):
     def test_input_image_vertical(self):
@@ -124,6 +132,7 @@ class TestInputImageVertical(unittest.TestCase):
         # check if the line segment is acquired.
         self.assertNotEqual(len(coordinates), 0)
 
+
 class TestInputImageAll(unittest.TestCase):
     def test_input_image_all(self):
         # Create an image with a gradient of pixel values
@@ -135,6 +144,7 @@ class TestInputImageAll(unittest.TestCase):
         # check if the line segment is acquired.
         self.assertNotEqual(len(coordinates), 0)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     file_path = "img/test_10k.jpg"
     unittest.main()
