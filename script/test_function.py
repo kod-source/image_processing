@@ -19,7 +19,7 @@ class TestShowAverage(unittest.TestCase):
         self.assertEqual(function.calculation_average(results), 3.0)
 
 # 平均値を求めるテストコード
-class TestCalculationMethods(unittest.TestCase):
+class TestCalculationAverage(unittest.TestCase):
     def test_calculation_average(self):
         # Test with a list of integers
         results = [1, 2, 3, 4, 5]
@@ -38,7 +38,7 @@ class TestCalculationMethods(unittest.TestCase):
         self.assertIsNone(function.calculation_average(results))
 
 # 標準偏差を求めるテストコード
-class TestCalculationMethods(unittest.TestCase):
+class TestCalculationStandardDeviation(unittest.TestCase):
     def test_calculation_standard_deviation(self):
         # Test with a list of integers
         results = [1, 2, 3, 4, 5]
