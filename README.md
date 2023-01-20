@@ -58,6 +58,9 @@ pip install pylsd-nova-mac-arm
     python script/main.py
     ```
 1. 下記のように線文が検出された画像であるか確認する
+    1. 線分が検出されない場合は画像の輝度など調整する必要がある
+        1. `script/gamma.py`を実行することで輝度を調整することができる
+        1. 21行目の`gamma`の値を変更することで調整できる（GUIで調整できるよう対応予定）
     <br /><img width="300" height="300" alt="image" src="https://user-images.githubusercontent.com/74532799/211551926-929b27d6-c826-45c7-a8bf-9de8e2a93066.png">
 1. 距離を求めたい2点をクリックする
     1. 2点をクリックすると下記のように倍率と誤差率を表示している
