@@ -1,10 +1,9 @@
 import cv2
 import numpy as np
-
-file_name = "SAX10k.tif"
+import const
 
 # 画像読込
-img = cv2.imread("img/" + file_name)
+img = cv2.imread(const.FILE_PATH)
 
 # """
 # **********************************************************
@@ -28,4 +27,4 @@ for i in range(256):
 # 読込画像をガンマ変換
 gamma_img = cv2.LUT(img, img2gamma)
 
-cv2.imwrite("img/gamma_" + file_name, gamma_img)
+cv2.imwrite("img/gamma_" + const.FILE_NAME, gamma_img)
