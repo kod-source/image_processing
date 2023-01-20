@@ -50,20 +50,23 @@ pip install pylsd-nova-mac-arm
 
 ## 実行手順
 1. imgフォルダー内に倍率を測定したい画像を配置する
-1. `script/const.py`の18行目の`FILE_NAME`の値を①のファイル名に変更する（今後実行する際に引数でファイル名を指定するように修正予定）
-    1. 希望値がわかっている場合は22行目の`DESIRED_VALUE`の値も変更する（誤差率を計算するときに使用する値）
+1. `script/const.py`の21行目の`FILE_NAME`の値を①のファイル名に変更する（今後実行する際に引数でファイル名を指定するように修正予定）
+    1. 希望値がわかっている場合は25行目の`DESIRED_VALUE`の値も変更する（誤差率を計算するときに使用する値）
 1. scriptフォルダー配下にあるファイルを指定して実行する
     1. 下記のコマンドでpythonを実行する（ファイル名は適宜合わせること）
     ```
     python script/main.py
     ```
 1. 下記のように線文が検出された画像であるか確認する
+    1. 線分が検出されない場合は画像の輝度など調整する必要がある
+        1. `script/gamma.py`を実行することで輝度を調整することができる
+        1. 20行目の`gamma`の値を変更することで調整できる（GUIで調整できるよう対応予定）
     <br /><img width="300" height="300" alt="image" src="https://user-images.githubusercontent.com/74532799/211551926-929b27d6-c826-45c7-a8bf-9de8e2a93066.png">
 1. 距離を求めたい2点をクリックする
     1. 2点をクリックすると下記のように倍率と誤差率を表示している
     1. `result`には倍率の測定結果、`diff`には誤差率を表示している（今後日本語の表示にも対応する予定）
     <br /><img width="300" height="300" alt="image" src="https://user-images.githubusercontent.com/74532799/211552984-7b830723-f954-4494-89f6-2e5f1294c58a.png">
 1. 画像を閉じると処理が終了し、`result`ディレクトリに画像が保存される。
-    1. `result1`の上に平均値と標準偏差値が表示される
-    <br /><img width="300" height="300" alt="image" src="https://user-images.githubusercontent.com/74532799/212275334-8d362daf-0c64-499c-8ea7-b4ba736579a4.png">
+    1. 下記の画像のように`result1`の上に平均値と標準偏差値が表示される
+    <br /><img width="300" height="300" alt="image" src="https://user-images.githubusercontent.com/74532799/213651800-d180d70e-dd69-473f-9011-92ca0cb45cc4.png">
 
